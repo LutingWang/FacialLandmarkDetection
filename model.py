@@ -5,7 +5,6 @@ Created on Wed Jan 22 11:03:07 2020
 
 @author: lutingwang
 """
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -27,7 +26,7 @@ def pretrain(model: Model, name: str):
     """Use a pretrained model to extract features.
     
     @param model: pretrained model acting as extractors
-    @param name: dataset name either "train" or "test"
+    @param name: dataset name (either "train" or "test")
     """
     print("predicting on " + name)
     base_path = f'./dataset/{name}/'
