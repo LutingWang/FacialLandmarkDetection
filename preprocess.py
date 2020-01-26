@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageStat, ImageEnhance
 
 
-def _crop(image: Image, rect: ('x_min', 'y_min', 'x_max', 'y_max')) 
+def _crop(image: Image, rect: ('x_min', 'y_min', 'x_max', 'y_max'))\
         -> (Image, 'expanded rect'):
     """Crop the image w.r.t. box identified by rect."""
     x_min, y_min, x_max, y_max = rect
@@ -26,7 +26,7 @@ def _crop(image: Image, rect: ('x_min', 'y_min', 'x_max', 'y_max'))
     return image, rect
 
 
-def _resize(image: Image, pts: '98-by-2 matrix') 
+def _resize(image: Image, pts: '98-by-2 matrix')\
         -> (Image, 'resized pts'):
     """Resize the image and landmarks simultaneously."""
     pts = pts / image.size * _resize.target_size
@@ -34,7 +34,7 @@ def _resize(image: Image, pts: '98-by-2 matrix')
     return image, pts
 
 
-def _fliplr(image: Image, pts: '98-by-2 matrix') 
+def _fliplr(image: Image, pts: '98-by-2 matrix')\
         -> (Image, 'corresponding pts'):
     """Flip the image and landmarks randomly."""
     if random.random() >= 0.5:

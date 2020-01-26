@@ -25,11 +25,20 @@
 └── ...
 ```
 
-然后依次执行
+然后执行数据预处理脚本
 
 ```
-python preprocess.py
-python model.py
+>>> python preprocess.py
+start processing train
+batch 149
+start processing test
+batch 49
 ```
 
-即可。
+程序会自动创建 `dataset` 目录。最后执行训练脚本即可
+
+```
+>>> python model.py
+```
+
+这一步的运行时间较长，需要耐心等待。

@@ -58,6 +58,8 @@ train_generator = data_generator('./dataset/train/')
 test_generator = data_generator('./dataset/test/')
 
 if __name__ == '__main__':
+    os.mkdir('./models/')
+    
     print("Extracting features with ResNet50")
     base_model = ResNet50(include_top=False, input_shape=(128, 128, 3))
     output = base_model.layers[38].output
@@ -78,7 +80,7 @@ if __name__ == '__main__':
     model.add(Dense(196))
     model.compile('adam', loss='mse', metrics=['accuracy'])
     model.summary()
-    plot_model(model, to_file='model.png', show_shapes=True)
+    plot_model(model, to_file='./models/model.png', show_shapes=True)
     print()
         
     history = model.fit_generator(
@@ -87,14 +89,16 @@ if __name__ == '__main__':
         validation_data=test_generator,
         validation_steps=VALIDATION_STEPS,
         epochs=4)
+    model.save('./models/model.h5')
     
     # Plot training & validation accuracy values
-    plt.plot(history.history['acc'])
-    plt.plot(history.history['val_acc'])
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
     plt.title('Model accuracy')
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Test'], loc='upper left')
+    plt.savefig('./models/accuracy.png')
     plt.show()
     
     # Plot training & validation loss values
@@ -104,9 +108,13 @@ if __name__ == '__main__':
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Test'], loc='upper left')
+    plt.savefig('./models/loss.png')
     plt.show()
     
     # Visualize results
+    os.mkdir('./visualization/')
+    os.mkdir('./visualization/train')
+    os.mkdir('./visualization/test')
     visual.train_result(model)
     visual.test_result(model)
     
